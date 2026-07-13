@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaskia - Portfolio Teknik Informatika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+       
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        .question-answer {
+    display: none; /* Tersembunyi secara default */
+}
+
+.question-item.active .question-answer {
+    display: block; /* Muncul saat item diklik (karena class active muncul) */
+}
+        .nav-links a.active {
+    background: rgba(190,94,156,0.3);
+    box-shadow: 0 0 15px #be5e9c;
+}
+        .biodata-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+/* CARD UTAMA */
+.biodata-main {
+    position: relative;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(25px);
+    padding: 3rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.biodata-main:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 40px rgba(190,94,156,0.4);
+}
+
+.biodata-glow {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, #be5e9c, transparent);
+    opacity: 0.4;
+}
+
+.biodata-main h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.biodata-role {
+    color: #aaa;
+    margin-bottom: 1.5rem;
+}
+
+.biodata-line {
+    height: 2px;
+    background: linear-gradient(90deg, #be5e9c, transparent);
+    margin-bottom: 2rem;
+}
+
+.biodata-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* CARD KONTAK */
+.biodata-contact {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(25px);
+    padding: 3rem;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.contact-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    transition: 0.3s;
+}
+
+.contact-item:hover {
+    transform: translateX(10px);
+    color: #545053;
+}
+
+.contact-item i {
+    font-size: 1.3rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .biodata-container {
+        grid-template-columns: 1fr;
+    }
+}
+        /* Sembunyikan jawaban secara default */
+.question-answer {
+    display: none; 
+    transition: all 0.3s ease;
+}
+
+/* Tampilkan jawaban saat item memiliki class .active */
+.question-item.active .question-answer {
+    display: block;
+}
+
+/* Opsional: Tambahkan indikator agar user tahu bisa diklik */
+.question-item {
+    cursor: pointer;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+    --neon-blue: #C2D8C4;
+    --neon-purple: #C2D8C4;
+    --neon-pink:  #C2D8C4;
+
+    --dark-bg:  #222222;
+    --dark-navy:#222222;
+    --glass-bg: #222222;
+
+    --glow-blue: 0 0 8px #C2D8C4;
+    --glow-purple: 0 0 8px #C2D8C4;
+    --glow-pink: 0 0 8px #C2D8C4;
+    --glow-white: 0 0 6px #C2D8C4;
+}
+
+        body {
+            background: var(--dark-bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            cursor: default;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--neon-blue) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--neon-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 80%, var(--neon-blue) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--neon-purple) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, var(--neon-pink) 0%, transparent 50%);
+            animation: bgShift 25s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+            33% { transform: scale(1.1) rotate(120deg); opacity: 0.5; }
+            66% { transform: scale(1.2) rotate(240deg); opacity: 0.4; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Digital Grid */
+        .digital-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(190,94,156,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(104,21,72,0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 35s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    .logo {
+        font-family: 'Orbitron', monospace;
+        font-size: 1.8rem;
+        font-weight: 900;
+        background: linear-gradient(45deg, #96949c, #dbacc5);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(190,94,156,0.2);
+            box-shadow: var(--glow-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+        font-family: 'Orbitron', monospace;
+        font-size: clamp(3rem, 6vw, 5.5rem);
+        font-weight: 900;
+        background: linear-gradient(45deg, #96949c, #dbacc5);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       text-shadow: none;
+       margin-bottom: 2rem;
+       line-height: 1.1;
+       }
+
+        @keyframes glowShift {
+            0% { filter: hue-rotate(0deg); text-shadow: var(--glow-blue); }
+            100% { filter: hue-rotate(120deg); text-shadow: var(--glow-purple); }
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            opacity: 0.95;
+            line-height: 1.7;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            box-shadow: var(--glow-blue);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid var(--neon-blue);
+            box-shadow: var(--glow-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(190,94,156,0.4);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 120px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 5rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow-blue);
+            position: relative;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: var(--glow-blue); }
+            100% { text-shadow: var(--glow-purple); }
+        }
+
+        /* PERFECT ABOUT SECTION - INTERACTIVE QUESTIONS */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        /* Profile Upload */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-pic {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: var(--glow-blue), 0 0 50px rgba(190,94,156,0.3);
+            border: 4px solid rgba(255,255,255,0.1);
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.08);  /* ← HANYA ZOOM, TIDAK PUTAR */
+            box-shadow: var(--glow-purple), 0 0 80px rgba(138,43,226,0.5);
+}
+
+        .profile-pic:hover img {
+          filter: brightness(1.1) contrast(1.1);
+          transform: scale(1.05);  /* ← Foto sedikit zoom */
+}
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .profile-pic:hover img {
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .upload-hint {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            font-size: 14px;
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            opacity: 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-pic:hover .upload-hint {
+            opacity: 1;
+            transform: translateY(-10px);
+        }
+
+        /* Interactive Questions Terminal */
+.questions-terminal {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    padding: 3rem;
+    border-radius: 30px;
+    border: 1px solid rgba(190,94,156,0.3);
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+    box-shadow: var(--glow-blue);
+}
+
+.questions-terminal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(190,94,156,0.1), transparent);
+    transition: left 0.8s;
+}
+
+.questions-terminal:hover::before {
+    left: 100%;
+}
+
+.terminal-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.terminal-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.dot-red { background: #a19f9f; box-shadow: var(--glow-pink); }
+.dot-yellow { background: #ddacd2; box-shadow: var(--glow-pink); }
+.dot-green { background: #e8c79f; box-shadow: var(--glow-blue); }
+
+.terminal-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    color: var(--neon-blue);
+    margin-left: auto;
+}
+
+.question-list {
+    height: 350px;
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+        .question-list {
+            height: 350px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .question-item {
+            background: rgba(255,255,255,0.03);
+            margin-bottom: 1.2rem;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--neon-purple);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideInQuestion 0.6s ease forwards;
+        }
+
+        .question-item:nth-child(1) { animation-delay: 0.1s; }
+        .question-item:nth-child(2) { animation-delay: 0.2s; }
+        .question-item:nth-child(3) { animation-delay: 0.3s; }
+        .question-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideInQuestion {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .question-item:hover {
+            transform: translateX(10px) scale(1.02);
+            background: rgba(190,94,156,0.1);
+            border-left-color: var(--neon-blue);
+            box-shadow: var(--glow-blue);
+        }
+
+        .question-icon {
+            font-size: 1.4rem;
+            color: var(--neon-pink);
+            margin-right: 1rem;
+            float: left;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-answer {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .question-item.active .question-answer {
+            display: block;
+            animation: fadeAnswer 0.5s ease forwards;
+        }
+
+        @keyframes fadeAnswer
+		 {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 0.9; transform: translateY(0); }
+        }
+
+        /* Bio Cards */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .bio-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(190,94,156,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Portfolio Styles - WITH IMAGES */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-card {
+            height: 350px;
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: var(--glow-blue);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(190,94,156,0.3);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-image {
+            transform: scale(1.1);
+            filter: brightness(1.2) contrast(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            height: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-overlay i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease 0.2s;
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease 0.3s;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: var(--glow-purple), 0 30px 60px rgba(190,94,156,0.4);
+        }
+
+        .portfolio-card:hover .portfolio-overlay i,
+        .portfolio-card:hover .portfolio-overlay h3 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+            z-index: 1;
+        }
+
+        .portfolio-card:hover::before {
+            left: 100%;
+        }
+
+        /* Modal Styles */
+        .portfolio-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: modalFade 0.4s ease;
+        }
+
+        .portfolio-modal.active {
+            display: flex;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            padding: 4rem;
+            border-radius: 30px;
+            border: 1px solid rgba(190,94,156,0.4);
+            max-width: 700px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--glow-purple);
+            animation: modalSlide 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.7) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: var(--neon-pink);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg) scale(1.2);
+            text-shadow: var(--glow-pink);
+        }
+
+        .modal-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--glow-blue);
+        }
+
+        /* Scrollbar Styling */
+        .question-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .question-list::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .question-list::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
+            box-shadow: var(--glow-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .questions-terminal {
+                height: 450px;
+                padding: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            z-index: 1001;
+            box-shadow: var(--glow-blue);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 5%;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(20px);
+            margin-top: 5rem;
+        }
+
+        /* Additional Card Styles */
+        .bio-icon, .education-icon, .skill-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .bio-grid, .education-grid, .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .bio-card, .education-card, .skill-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(190,94,156,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .bio-card:hover, .education-card:hover, .skill-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: var(--glow-purple);
+            border-color: var(--neon-blue);
+        }
+
+        .skill-progress, .progress-fill {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 2s ease;
+            box-shadow: var(--glow-blue);
+        }
+
+        @keyframes trailFade {
+            to { 
+                opacity: 0; 
+                transform: translateY(-30px) scale(0); 
+            }
+        }
+		/* Contact Section Styles */
+		.section#contact {
+			padding: 5rem 2rem;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.section-header {
+			text-align: center;
+			margin-bottom: 4rem;
+			position: relative;
+		}
+
+		.section-title {
+			font-size: clamp(2.5rem, 5vw, 4rem);
+			background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			position: relative;
+			display: inline-block;
+		}
+
+		.title-glow {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 60%;
+			height: 60%;
+			background: linear-gradient(45deg, var(--neon-blue), var(--neon-pink));
+			border-radius: 50%;
+			transform: translate(-50%, -50%) scale(0);
+			opacity: 0.3;
+			animation: glowPulse 3s ease-in-out infinite;
+		}
+
+		@keyframes glowPulse {
+			0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.3; }
+			50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+		}
+
+		.contact-wrapper {
+			max-width: 1400px;
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+			align-items: start;
+		}
+
+		.platforms-grid {
+			display: grid;
+			gap: 2rem;
+		}
+
+		.platform-card {
+			position: relative;
+			background: var(--glass-bg);
+			backdrop-filter: blur(20px);
+			border: 1px solid rgba(190, 94, 156, 0.3);
+			border-radius: 30px;
+			padding: 3rem 2.5rem;
+			transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+			cursor: pointer;
+			overflow: hidden;
+		}
+
+		.platform-card:hover {
+			transform: translateY(-15px) scale(1.02);
+			box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+			border-color: rgba(91, 86, 89, 0.6);
+		}
+
+		.whatsapp-card .platform-icon i { color: #25D366; }
+		.email-card .platform-icon i { color: #FF6B6B; }
+
+		.platform-icon {
+			position: relative;
+			width: 80px;
+			height: 80px;
+			margin-bottom: 2rem;
+		}
+
+		.platform-icon i {
+			font-size: 3rem;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+			transition: all 0.3s ease;
+		}
+
+		.platform-card:hover .platform-icon i {
+			transform: translate(-50%, -50%) scale(1.1);
+			filter: drop-shadow(0 0 20px currentColor);
+		}
+
+		.icon-glow {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(circle, currentColor 0%, transparent 70%);
+			border-radius: 50%;
+			transform: translate(-50%, -50%) scale(0);
+			opacity: 0.4;
+			transition: all 0.5s ease;
+		}
+
+		.platform-card:hover .icon-glow {
+			transform: translate(-50%, -50%) scale(1.5);
+			opacity: 0.6;
+		}
+
+		.platform-content h3 {
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+			color: #fff;
+			font-weight: 600;
+		}
+
+		.contact-link {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			color: #fff;
+			text-decoration: none;
+			font-size: 1.3rem;
+			font-weight: 500;
+			transition: all 0.3s ease;
+		}
+
+		.contact-link:hover span {
+			color: var(--neon-pink);
+			transform: translateX(10px);
+		}
+
+		.contact-link i {
+			font-size: 1.2rem;
+			transition: all 0.3s ease;
+		}
+
+		.platform-wave {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 20px;
+			background: linear-gradient(45deg, transparent, rgba(190, 94, 156, 0.1), transparent);
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
+			opacity: 0;
+			transition: opacity 0.3s ease;
+		}
+
+		.platform-card:hover .platform-wave {
+			opacity: 1;
+		}
+
+		/* Form Styles */
+		.form-container {
+			position: relative;
+		}
+
+		.form-card {
+			background: var(--glass-bg);
+			backdrop-filter: blur(25px);
+			border: 1px solid rgba(190, 94, 156, 0.3);
+			border-radius: 30px;
+			padding: 3.5rem;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.form-header {
+			text-align: center;
+			margin-bottom: 2.5rem;
+			position: relative;
+		}
+
+		.form-header h3 {
+			font-size: 1.8rem;
+			color: #fff;
+			margin-bottom: 1rem;
+		}
+
+		.form-glow {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 100px;
+			height: 100px;
+			background: radial-gradient(circle, var(--neon-blue), transparent);
+			border-radius: 50%;
+			transform: translate(-50%, -50%) scale(0);
+			opacity: 0.3;
+			animation: formGlow 4s ease-in-out infinite;
+		}
+
+		@keyframes formGlow {
+			0%, 100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.2; }
+			50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+		}
+
+		.input-group {
+			position: relative;
+			margin-bottom: 2rem;
+		}
+     
+		.input-group input,
+		.input-group textarea {
+			width: 100%;
+			padding: 1.5rem 1.2rem;
+			background: rgba(0, 0, 0, 0.4);
+			border: 2px solid rgba(190, 94, 156, 0.3);
+			border-radius: 20px;
+			color: #fff;
+			font-size: 1.1rem;
+			font-family: inherit;
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			outline: none;
+		}
+
+		.input-group input:focus,
+		.input-group textarea:focus {
+			border-color: var(--neon-pink);
+			box-shadow: 0 0 30px rgba(190, 94, 156, 0.3);
+			background: rgba(0, 0, 0, 0.6);
+			transform: translateY(-2px);
+		}
+
+		.input-group label {
+			position: absolute;
+			top: 1.5rem;
+			left: 1.2rem;
+			color: rgba(255, 255, 255, 0.6);
+			pointer-events: none;
+			transition: all 0.3s ease;
+			font-size: 1rem;
+		}
+
+		.input-group:focus-within label,
+		.input-group input:not(:placeholder-shown) + label,
+		.input-group textarea:not(:placeholder-shown) + label {
+			top: -0.5rem;
+			left: 1rem;
+			background: var(--glass-bg);
+			padding: 0 0.5rem;
+			color: var(--neon-pink);
+			font-size: 0.9rem;
+		}
+
+		.textarea-group textarea {
+			resize: vertical;
+			min-height: 120px;
+		}
+
+		.submit-btn {
+			width: 100%;
+			padding: 1.5rem;
+			background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+			border: none;
+			border-radius: 25px;
+			color: #fff;
+			font-size: 1.2rem;
+			font-weight: 600;
+			cursor: pointer;
+			position: relative;
+			overflow: hidden;
+			transition: all 0.4s ease;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.submit-btn:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 20px 40px rgba(190, 94, 156, 0.4);
+		}
+
+		.btn-wave {
+			position: absolute;
+			top: 0;
+			left: -100%;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+			transition: left 0.6s;
+		}
+
+		.submit-btn:hover .btn-wave {
+			left: 100%;
+		}
+
+		/* Footer */
+		.footer {
+			background: rgba(0, 0, 0, 0.8);
+			backdrop-filter: blur(20px);
+			padding: 3rem 2rem 2rem;
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.footer-content {
+			position: relative;
+			z-index: 2;
+		}
+
+		.footer .highlight {
+			color: var(--neon-blue);
+			font-weight: 700;
+		}
+
+		.footer-sub {
+			color: rgba(255, 255, 255, 0.7);
+			margin-top: 0.5rem;
+			font-size: 1rem;
+		}
+
+		.footer-glow {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			width: 200px;
+			height: 200px;
+			background: radial-gradient(circle, var(--neon-pink), transparent);
+			border-radius: 50%;
+			transform: translate(-50%, 50%) scale(0.8);
+			opacity: 0.1;
+			animation: footerGlow 6s ease-in-out infinite;
+		}
+
+		@keyframes footerGlow {
+			0%, 100% { transform: translate(-50%, 50%) scale(0.8); opacity: 0.1; }
+			50% { transform: translate(-50%, 50%) scale(1.3); opacity: 0.2; }
+		}
+
+        /* Tambahkan ini di bagian bawah file CSS-mu */
+
+.social-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; /* Sesuaikan jarak antar ikon */
+    margin-top: 20px; /* Memberi jarak dari teks footer */
+}
+
+.social-container a {
+    color: var(--neon-blue); /* Mengambil variabel warna biru yang sudah ada */
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-container a:hover {
+    color: var(--neon-pink); /* Efek berubah warna saat di-hover */
+    transform: translateY(-5px);
+}
+		
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="digital-grid"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Zaskia<span style="color: var(--neon-blue);">.</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#biodata">Biodata</a></li>
+                <li><a href="#education">Pendidikan</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Menulis Kode<br><span>Mengukir Masa Depan</span></h1>
+            <p>"Mahasiswi Teknik Informatika. Nggak cuma tenggelam dalam baris kode, tapi juga suka desain yang estetik. Fokus ngembangin web yang nggak cuma jalan, tapi juga nyaman dilihat dan dipakai."</p>
+            <div class="cta-buttons">
+                <a href="#portfolio" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Lihat Portofolio
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-paper-plane"></i> Hubungi Saya
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PERFECT ABOUT SECTION -->
+    <section id="about" class="section">
+    <h2><i class="fas fa-user-astronaut"></i> About Me</h2>
+    
+    <div class="about-container">
+        <div class="profile-card">
+            <div class="profile-container">
+                <input type="file" id="profile-input" accept="image/*" style="display: none;">
+                <label for="profile-input">
+                    <div class="profile-pic" id="profile-display">
+                        <img src="https://i.pinimg.com/736x/38/bf/fc/38bffc261655107ed41b8c722e63ec27.jpg" id="profile-img">
+                    </div>
+                </label>
+            </div>
+            
+            <div class="profile-details">
+                <h3></h3>
+                <div class="badge-tech">
+                </div>
+                <div class="bio-info">
+                </div>
+            </div>
+        </div>
+
+        <div class="questions-terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+                <div class="terminal-title"> ABOUT_ME</div>
+            </div>
+            
+            <div class="question-list">
+                <div class="question-item">
+                <div class="question-header">
+                About Me?
+            </div>
+                <div class="question-answer">
+                <p>Saya memilih Teknik Informatika karena tertarik pada perkembangan teknologi di era digital saat ini. Saya fokus pada pengembangan web dan desain UI/UX, serta terus belajar HTML, CSS, dan JavaScript.
+                   Saya memiliki tujuan menjadi developer yang mampu menciptakan solusi digital yang bermanfaat, karena saya percaya teknologi adalah kunci untuk membangun masa depan yang lebih baik.</p>
+            </div>
+        </div>
+            <div class="question-list">
+                <div class="question-item">
+                <div class="question-header">
+                Kenapa Teknik Informatika??
+            </div>
+                <div class="question-answer">
+                <p>Teknik Informatika itu pilihan yang keren karena peluang kerjanya luas, gajinya oke, dan bisa kerja dari mana saja. Selain itu,juga bisa bikin aplikasi sendiri atau bahkan membangun startup, sambil melatih cara berpikir yang lebih logis dan kreatif.</p>
+            </div>
+        </div>
+               <div class="question-item">
+               <div class="question-header">
+               Fokus teknologi saat ini?
+          </div>
+               <div class="question-answer">
+               <p>Teknik Informatika menjadi kunci di era teknologi modern, di mana hampir semua aspek kehidupan telah terhubung secara digital.</p>
+          </div>
+        </div>
+               <div class="question-item">
+               <div class="question-header">
+               Tujuan / Cita-cita?
+          </div>
+               <div class="question-answer">
+               <p>Saya ingin menjadi developer yang mampu menciptakan solusi digital yang bermanfaat.</p>
+          </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Biodata Section -->
+    <section id="biodata" class="section">
+    <h2><i class="fas fa-id-badge"></i> Identitas </h2>
+
+    <div class="biodata-container">
+
+        <!-- CARD UTAMA -->
+        <div class="biodata-main">
+            <div class="biodata-glow"></div>
+
+            <h3>ZASKIA</h3>
+            <p class="biodata-role">Mahasiswi Teknik Informatika</p>
+
+            <div class="biodata-line"></div>
+
+            <div class="biodata-item">
+                <span>🎂 Lahir</span>
+                <strong>Gong, 03 Maret 2006</strong>
+            </div>
+
+            <div class="biodata-item">
+                <span>👩 Gender</span>
+                <strong>Perempuan</strong>
+            </div>
+
+            <div class="biodata-item">
+                <span>🩸 Golongan Darah</span>
+                <strong>O+</strong>
+            </div>
+
+            <div class="biodata-item">
+                <span>🕌 Agama</span>
+                <strong>Islam</strong>
+            </div>
+
+        </div>
+
+        <!-- CARD KONTAK -->
+        <div class="biodata-contact">
+            <h3>Kontak & Lokasi</h3>
+
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <a href="https://www.google.com/maps?q=Gampong+Gong+Pidie" target="_blank">
+             Gampong Gong, Kec. Simpang Tiga, Pidie
+         </a>
+        </div>
+         <div class="contact-item">
+           <i class="fas fa-phone"></i>
+           <a href="https://wa.me/+6282238240627" target="_blank">
+            +62822-3824-0627
+        </a>
+        </div>
+        <div class="contact-item">
+           <i class="fas fa-envelope"></i>
+           <a href="mailto:daskiagotik2@gmail.com">
+            daskiagotik2@gmail.com
+        </a>
+        </div>
+
+        <div class="contact-item">
+          <i class="fab fa-github"></i>
+          <a href="https://github.com/daskiagotik2-ux" target="_blank">
+          github.com/zaskia-dev
+        </a>
+        </div>
+
+        </div>
+
+    </div>
+</section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <h2><i class="fas fa-book"></i> Riwayat Pendidikan</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <h3>S1 Teknik Informatika</h3>
+                <p><strong>Universitas Jabal Ghafur</strong><br>
+                2024 - Sekarang (Semester 4)<br>
+                <div class="skill-progress">
+                    <div class="progress-fill" style="width: 93%;"></div>
+                </div></p>
+            </div>
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3>Madrasah Aliyah Negeri</h3>
+                <p><strong>SMANSA PIDIE</strong><br>
+                2021 - 2024<br>
+                <div class="skill-progress">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div></p>
+            </div>
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3>Sekolah Menengah Pertama</h3>
+                <p><strong>SMPN 1 SP.3</strong><br>
+                2018 - 2021<br>
+                <div class="skill-progress">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div></p>
+            </div>
+            <div class="education-card">
+                <div class="education-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3>Sekolah Dasar</h3>
+                <p><strong>SDN 1 GIGIENG</strong><br>
+                2012 - 2018<br>
+                <div class="skill-progress">
+                    <div class="progress-fill" style="width: 100%;"></div>
+                </div></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2><i class="fas fa-tools"></i> Skills & Prestasi</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fab fa-html5"></i>
+                </div>
+                <h3>HTML5 & CSS3</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="95%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fab fa-js-square"></i>
+                </div>
+                <h3>JavaScript</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="90%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fab fa-php"></i>
+                </div>
+                <h3>PHP</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="88%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fab fa-css3-alt"></i>
+                </div>
+                <h3>TailwindCSS</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="85%"></div>
+                </div>
+            </div>
+             <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-microphone-alt"></i>
+                </div>
+                <h3>Juara 3 MTQ Tilawah</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="85%"></div>
+                </div>
+            </div>
+             <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Peserta Olimpiade Matematika</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="85%"></div>
+                </div>
+            </div>
+             <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Juara 1 Cerdas Cermat</h3>
+                <div class="skill-progress">
+                    <div class="progress-fill" data-width="85%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <h2>Karya & Proyek Saya</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <img src="https://i.pinimg.com/736x/73/5b/d4/735bd4eda373e367dbf36d76f785b787.jpg" alt="WEB TRAVEL">
+                <div class="portfolio-overlay">
+                    <h3>TREVEL</h3>
+                    <p>Eksplorasi Korea, tanpa batas.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <a href="https://daskiagotik2-ux.github.io/trevel/" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://i.pinimg.com/736x/d5/2a/34/d52a34c45c95c72253c4bddd96c1cb15.jpg" alt="WEB COMUNITAS ENERGI">
+                <div class="portfolio-overlay">
+                    <h3>Perbaikan Jalan</h3>
+                    <p>Bangun Jalan, Lancarkan Mobilitas.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                       <a href=" https://daskiagotik2-ux.github.io/projekkia/" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" target="_blank">GitHub</a> 
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://i.pinimg.com/736x/a1/3c/44/a13c44e347c97f412009238aa65ed98f.jpg" alt="Portfolio Website">
+                <div class="portfolio-overlay">
+                    <h3>Presensi Dosen</h3>
+                    <p></p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                      <a href="https://presensi.42web.io/index.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" target="_blank">GitHub</a>   
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://i.pinimg.com/736x/54/a4/f9/54a4f9d5f2a34e56b9daa53313f4d805.jpg" alt="WEB SEHAT Al">
+                <div class="portfolio-overlay">
+                    <h3> SEHAT Al</h3>
+                    <p>Sembuh. Tumbuh. Selaras.</p>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                       <a href=" https://youwaras.rf.gd/" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" target="_blank">GitHub</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   <!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="section-header">
+        <h2 class="section-title">
+            <i class="fas fa-paper-plane"></i>
+            <span>Hubungi Saya</span>
+        </h2>
+        <div class="title-glow"></div>
+    </div>
+
+        <!-- WhatsApp Contact Form -->
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <h3><i class="fab fa-whatsapp"></i> Kirim Pesan WhatsApp</h3>
+                    <div class="form-glow"></div>
+                </div>
+                
+                <form class="contact-form" id="whatsapp-form">
+                    <div class="input-group">
+                        <input type="text" id="name" placeholder=" " required>
+                        <label for="name">Nama Lengkap</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="tel" id="phone" placeholder=" " required>
+                        <label for="phone">Nomor WhatsApp</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder=" ">
+                        <label for="email">Email (Opsional)</label>
+                    </div>
+                    
+                    <div class="input-group textarea-group">
+                        <textarea id="message" rows="5" placeholder=" " required></textarea>
+                        <label for="message">Pesan Anda</label>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Kirim Pesan WhatsApp</span>
+                        <div class="btn-wave"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="social-container">
+            <a href="https://www.instagram.com/0303_dump?igsh=YmR3eWNoZHFqdnEw"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@gaatauu393?_r=1&_t=ZS-95nkWThC5gW"><i class="fab fa-tiktok"></i></a>
+            <a href="+6282238240627"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2026 <span class="highlight">ZASKIA</span> <i class="fas fa-heart"></i></p>
+        <p class="footer-sub">Mahasiswi S1 Teknik Informatika | Universitas Jabal Ghafur</p>
+    </div>
+    <div class="footer-glow"></div>
+</footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Profile Upload
+        const profileInput = document.getElementById('profile-input');
+        const profileImg = document.getElementById('profile-img');
+        profileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profileImg.src = e.target.result;
+                    profileImg.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        profileImg.style.transform = 'scale(1)';
+                    }, 300);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // INTERACTIVE QUESTIONS TERMINAL
+         document.querySelectorAll('.question-item').forEach(item => {
+         item.addEventListener('click', () => {
+        // Opsional: Tutup item lain jika ingin efek accordion (hanya satu yang terbuka)
+        document.querySelectorAll('.question-item').forEach(otherItem => {
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+            }
+        });
+
+        // Toggle class 'active' untuk item yang diklik
+        item.classList.toggle('active');
+    });
+});
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+        });
+
+        // Animate Progress Bars
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.dataset.width || bar.style.width;
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.skill-card, .education-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Floating Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Portfolio Modal Functionality
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                const modal = document.getElementBy
+				('getElementById')(modalId);
+                modal.classList.add('active');
+            });
+        });
+
+        // Close modals
+        document.querySelectorAll('.close-modal').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                this.closest('.portfolio-modal').classList.remove('active');
+            });
+        });
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.portfolio-modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // WhatsApp Form - TERHUBUNG LANGSUNG KE WHATSAPP ✅
+document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !message) {
+        alert('⚠️ Nama dan pesan wajib diisi!');
+        return;
+    }
+
+    const whatsappNumber = "6282238240627";
+    let whatsappMessage = `🌟 *PESAN DARI WEBSITE PORTFOLIO ZASKIA* 🌟\n\n`;
+    whatsappMessage += `👤 *Nama:* ${name}\n`;
+    if (phone) whatsappMessage += `📱 *Nomor HP:* ${phone}\n`;
+    if (email) whatsappMessage += `✉️ *Email:* ${email}\n`;
+    whatsappMessage += `\n💬 *Pesan:*\n${message}\n\n⏰ *Waktu:* ${new Date().toLocaleString('id-ID')}`;
+    
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappURL = `https://wa.me/${6282238240627}?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, '_blank');
+    this.reset();
+    
+    // Feedback sukses
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-check"></i> <span>Pesan Dikirim!</span> <div class="btn-wave"></div>';
+    submitBtn.style.background = 'linear-gradient(135deg, #25D366, #128C7E)';
+    
+    setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.style.background = 'linear-gradient(135deg, var(--neon-blue), var(--neon-pink))';
+    }, 2000);
+});
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10,10,10,0.98)';
+                navbar.style.backdropFilter = 'blur(30px)';
+            } else {
+                navbar.style.background = 'rgba(10,10,10,0.95)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+        });
+
+        // Enhanced Mouse Trail Effect
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.15) {
+                const trail = document.createElement('div');
+                trail.style.cssText = `
+                    position: fixed;
+                    width: 8px; height: 8px;
+                    background: radial-gradient(circle, var(--neon-pink) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9997;
+                    left: ${e.clientX}px;
+                    top: ${e.clientY}px;
+                    animation: trailFade 0.8s ease-out forwards;
+                    mix-blend-mode: difference;
+                `;
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 800);
+            }
+        });
+
+       
+        // 1. Preload animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+
+
+        // 3. Enhanced Mouse Trail Effect
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() < 0.15) {
+                const trail = document.createElement('div');
+                trail.style.cssText = `
+                    position: fixed;
+                    width: 8px; height: 8px;
+                    background: radial-gradient(circle, var(--neon-pink) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9997;
+                    left: ${e.clientX}px;
+                    top: ${e.clientY}px;
+                    animation: trailFade 0.8s ease-out forwards;
+                    mix-blend-mode: difference;
+                `;
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 800);
+                console.log("JS jalan");
+            }
+        });
+        const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        if (scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(a => {
+        a.classList.remove("active");
+        if (a.getAttribute("href") === "#" + current) {
+            a.classList.add("active");
+        }
+    });
+});
+
+      console.log('🌟 Zaskia Portfolio v2.0 - System Ready! 🚀');
+      document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+
+        target.scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+    </script>
+    </body>
+</html>
